@@ -9,7 +9,7 @@ esphome:
 
 
   project:
-    name: "delqueso.ClimateMonitor"
+    name: "delqueso.climatemonitor"
 
 # Example configuration entry
 http_request:
