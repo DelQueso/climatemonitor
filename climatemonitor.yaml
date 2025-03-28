@@ -41,6 +41,7 @@ wifi:
     password: '12345678'
 captive_portal:
 logger:
+  level: NONE
 
 # Define GPIO outputs
 output:
@@ -95,6 +96,21 @@ sensor:
     name: Relative Humidity
     force_update: true
   update_interval: 60s    # We control when to read data
+
+  - platform: wifi_signal # Reports the WiFi signal strength/RSSI in dB
+    name: "WiFi Signal dB"
+    id: wifi_signal_db
+    update_interval: 60s
+    entity_category: "diagnostic"
+
+  - platform: copy # Reports the WiFi signal strength in %
+    source_id: wifi_signal_db
+    name: "WiFi Signal Percent"
+    filters:
+      - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
+    unit_of_measurement: "%"
+    entity_category: "diagnostic"
+    device_class: ""      
 
 # Connection status, door open, alarm handling
 interval:
