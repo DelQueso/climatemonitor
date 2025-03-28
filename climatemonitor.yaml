@@ -1,5 +1,5 @@
 substitutions:
-  name: "ClimateMonitor"
+  name: "climatemonitor"
   friendly_name: "Climate Monitor"
 esphome:
   name: "${name}"
