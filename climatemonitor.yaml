@@ -87,15 +87,15 @@ i2c:
   scan: true
   id: bus_a
 sensor:
-- platform: sht4x
-  id: temperature_sensor    # Set id for the sensor
-  temperature:
-    name: Temperature
-    force_update: true
-  humidity:
-    name: Relative Humidity
-    force_update: true
-  update_interval: 60s    # We control when to read data
+  - platform: sht4x
+    id: temperature_sensor    # Set id for the sensor
+    temperature:
+      name: Temperature
+      force_update: true
+    humidity:
+      name: Relative Humidity
+      force_update: true
+    update_interval: 60s    # We control when to read data
 
   - platform: wifi_signal # Reports the WiFi signal strength/RSSI in dB
     name: "WiFi Signal dB"
