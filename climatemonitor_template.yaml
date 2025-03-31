@@ -82,7 +82,7 @@ automation:
       - seconds: /1
         trigger: time_pattern
         id: time_pattern
-      - entity_id: sensor.climatemonitor_template_alarm
+      - entity_id: sensor.template_climatemonitor_template_alarm
         trigger: state
         id: state_change
     conditions: []
