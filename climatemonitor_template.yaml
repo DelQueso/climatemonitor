@@ -3,7 +3,7 @@ template:
   - binary_sensor:
     - name: climatemonitor_template_temperature_outside_threshold_flag
       delay_on: >
-       {% set delayOn = states('input_number.climatemonitor_template_temperature_alert_delay') | int(0) %}
+       {% set delayOn = states('input_number.climatemonitor_template_temperature_alarm_notification_delay') | int(0) %}
          {{delayOn}}
       state: >
         {% set current_temp = states('sensor.climatemonitor_template_temperature') %}
