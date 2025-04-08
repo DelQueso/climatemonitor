@@ -5,11 +5,7 @@ esphome:
   name: "${name}"
   friendly_name: "${friendly_name}"
   name_add_mac_suffix: true
-text_sensor:
-  - platform: template
-    name: "Project Name"
-    lambda: |-
-      return {"delqueso.climatemonitor"};
+
 
 
   project:
@@ -114,8 +110,14 @@ sensor:
       - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
     unit_of_measurement: "%"
     entity_category: "diagnostic"
-    device_class: ""      
-
+    device_class: ""    
+    
+text_sensor:
+  - platform: template
+    name: "Project Name"
+    lambda: |-
+      return {"delqueso.climatemonitor"};
+      
 # Connection status, door open, alarm handling
 interval:
 - interval: 1s
