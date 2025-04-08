@@ -5,7 +5,11 @@ esphome:
   name: "${name}"
   friendly_name: "${friendly_name}"
   name_add_mac_suffix: true
-
+text_sensor:
+  - platform: template
+    name: "Project Name"
+    lambda: |-
+      return {"delqueso.climatemonitor"};
 
 
   project:
