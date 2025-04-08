@@ -1,4 +1,10 @@
 template:
+  - sensor:
+    - name: climatemonitor_template_config_version
+      state: 1.0.0
+      attributes:
+        friendly_name: "Config Version"
+        myAttr: DelQueso
   # Check if temperature is within range. When temperature is unavailable, this value is set to false. The sensor becomes true after some delay.
   - binary_sensor:
     - name: climatemonitor_template_temperature_outside_threshold_flag
