@@ -1,7 +1,1 @@
-template:
-  - sensor:
-    - name: climatemonitor_template_config_version
-      state: 1.0.0
-      attributes:
-        friendly_name: "Config Version"
-        myAttr: DelQueso
+version: 6.9.9
