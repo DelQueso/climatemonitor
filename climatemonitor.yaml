@@ -1,17 +1,13 @@
 substitutions:
   name: "climatemonitor"
   friendly_name: "Climate Monitor"
+  manufacturer: "delqueso"
 esphome:
   name: "${name}"
   friendly_name: "${friendly_name}"
   name_add_mac_suffix: true
-
-
-
   project:
-    name: "delqueso.climatemonitor"
-
-# Example configuration entry
+    name: "${manufacturer}.${name}"
 http_request:
   verify_ssl: true
   buffer_size_rx: 2048
@@ -19,29 +15,45 @@ http_request:
 update:
   - platform: http_request
     name: Firmware Update
-    source: https://github.com/delqueso/climatemonitor/releases/latest/download/climatemonitor.manifest.json
+    source: https://github.com/${manufacturer}/${name}/releases/latest/download/${name}.manifest.json
 esp32:
   board: esp32dev
   framework:
     type: esp-idf
-    
-
-
-
-
-api:
-
 ota:
 - platform: http_request
-
 wifi:
-
   # Enable fallback hotspot (captive portal) in case wifi connection fails
   ap:
     password: '12345678'
 captive_portal:
 logger:
   level: NONE
+api: 
+sensor:
+  - platform: wifi_signal # Reports the WiFi signal strength/RSSI in dB
+    name: "WiFi Signal dB"
+    id: wifi_signal_db
+    update_interval: 60s
+    entity_category: "diagnostic"
+
+  - platform: copy # Reports the WiFi signal strength in %
+    source_id: wifi_signal_db
+    name: "WiFi Signal Percent"
+    filters:
+      - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
+    unit_of_measurement: "%"
+    entity_category: "diagnostic"
+    device_class: "" 
+  - platform: sht4x
+    id: temperature_sensor    # Set id for the sensor
+    temperature:
+      name: Temperature
+      force_update: true
+    humidity:
+      name: Relative Humidity
+      force_update: true
+    update_interval: 60s    # We control when to read data
 
 # Define GPIO outputs
 output:
@@ -86,37 +98,7 @@ i2c:
   scl: GPIO13
   scan: true
   id: bus_a
-sensor:
-  - platform: sht4x
-    id: temperature_sensor    # Set id for the sensor
-    temperature:
-      name: Temperature
-      force_update: true
-    humidity:
-      name: Relative Humidity
-      force_update: true
-    update_interval: 60s    # We control when to read data
 
-  - platform: wifi_signal # Reports the WiFi signal strength/RSSI in dB
-    name: "WiFi Signal dB"
-    id: wifi_signal_db
-    update_interval: 60s
-    entity_category: "diagnostic"
-
-  - platform: copy # Reports the WiFi signal strength in %
-    source_id: wifi_signal_db
-    name: "WiFi Signal Percent"
-    filters:
-      - lambda: return min(max(2 * (x + 100.0), 0.0), 100.0);
-    unit_of_measurement: "%"
-    entity_category: "diagnostic"
-    device_class: ""    
-    
-text_sensor:
-  - platform: template
-    name: "Project Name"
-    lambda: |-
-      return {"delqueso.climatemonitor"};
       
 # Connection status, door open, alarm handling
 interval:
