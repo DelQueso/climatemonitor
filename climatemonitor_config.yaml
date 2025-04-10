@@ -70,7 +70,6 @@ input_boolean:
     name: "Report Temperature"
     icon: mdi:checkbox-marked  
     initial: true
-input_boolean:
   climatemonitor_template_report_humidity:
     name: "Report Humidity"
     icon: mdi:checkbox-marked  
