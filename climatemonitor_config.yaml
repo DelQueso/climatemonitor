@@ -1,7 +1,7 @@
 template:
   - sensor:
     - name: climatemonitor_template_installed_config_version
-      state: 1.0.3
+      state: 1.0.4
   - binary_sensor:
     - name: climatemonitor_template_config_version_uptodate
       state: >
@@ -130,5 +130,5 @@ automation:
             sequence:
               - data:
                   entity_id: "{{ trigger.entity_id }}"
-                action: script.alarm_notifications
+                action: script.alarm_collect
     mode: queued
