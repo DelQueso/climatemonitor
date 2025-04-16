@@ -1,7 +1,7 @@
 template:
   - sensor:
     - name: climatemonitor_template_installed_config_version
-      state: 1.0.2
+      state: 1.0.3
   - binary_sensor:
     - name: climatemonitor_template_config_version_uptodate
       state: >
@@ -63,7 +63,7 @@ command_line:
       command: >
         wget -qO- https://raw.githubusercontent.com/DelQueso/climatemonitor/refs/heads/main/climatemonitor_config.yaml |
         grep 'state:' | head -n 1 | cut -d':' -f2 | xargs
-      scan_interval: 30
+      scan_interval: 3600
       value_template: "{{ value }}"
 input_boolean:
   climatemonitor_template_report_temperature:
