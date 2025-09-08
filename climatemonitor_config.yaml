@@ -51,7 +51,7 @@ template:
             {% endif %}
           {% endif %}
         attributes:
-          friendly_name: "{{ states('input_text.climatemonitor_template_name') }}"
+          display_name: "{{ states('input_text.climatemonitor_template_name') }}"
           group:  "{{ states('input_text.climatemonitor_template_group') }}"
           location: "{{ states('input_text.climatemonitor_template_location') }}"
           low_temperature_threshold: "{{ states('input_number.climatemonitor_template_low_temperature_threshold') }}"
