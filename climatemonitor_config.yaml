@@ -1,7 +1,7 @@
 template:
   - sensor:
     - name: climatemonitor_template_installed_config_version
-      state: 1.0.4
+      state: 1.0.5
   - binary_sensor:
     - name: climatemonitor_template_config_version_uptodate
       state: >
