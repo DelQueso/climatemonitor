@@ -1,7 +1,7 @@
 template:
   - sensor:
     - name: climatemonitor_template_installed_config_version
-      state: 1.0.5
+      state: 1.0.6
   - binary_sensor:
     - name: climatemonitor_template_config_version_uptodate
       state: >
@@ -33,7 +33,8 @@ template:
       - name: climatemonitor_template_last_update
         unit_of_measurement: "s"
         state: "{{ (as_timestamp(now()) - as_timestamp(states.sensor.climatemonitor_template_temperature.last_updated)) | float | round(0) }}"
-      - unique_id: climatemonitor_template_alarm
+      - name: climatemonitor_template_alarm
+        unique_id: climatemonitor_template_alarm
         state: >
           {% set current_temp = states('sensor.climatemonitor_template_temperature') %}
           {% set last_update = states('sensor.climatemonitor_template_last_update') | float %}
@@ -108,7 +109,7 @@ automation:
       - seconds: /1
         trigger: time_pattern
         id: time_pattern
-      - entity_id: sensor.template_climatemonitor_template_alarm
+      - entity_id: sensor.climatemonitor_template_alarm
         trigger: state
         id: state_change
     conditions: []
